@@ -22,7 +22,12 @@ const search = (input, template) => {
     return template.replace('%s', encodeURIComponent(input));
   }
 
-	localforage.setDriver(localforage.INDEXEDDB);
+localforage.config({
+  driver: localforage.INDEXEDDB,
+  name: 'Ultraviolet',
+  version: 1.0,
+  storeName: 'ultraviolet_config'
+});
 
 	(async () => {
 	if (!await localforage.getItem('bare')) await localforage.setItem('bare', prompt('Bare server:'));
