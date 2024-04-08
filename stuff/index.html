@@ -1,0 +1,29 @@
+<script src="./uv.bundle.js"></script>
+<script src="./uv.config.js"></script>
+
+<script>
+const search = (input, template) => {
+    let url;
+  
+    try {
+      url = new URL(input);
+
+      if (url.hostname.includes('.')) return url.toString();
+    } catch { }
+  
+    try {
+      url = new URL(`http://${input}`);
+
+      if (url.hostname.includes('.')) return url.toString();
+    } catch { }
+  
+    // Treat the input as a search query
+    return template.replace('%s', encodeURIComponent(input));
+  }
+	
+    navigator.serviceWorker.register('./sw.js', {
+        scope: __uv$config.prefix
+    }).then(e => {
+		window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://duckduckgo.com/search?q=%s', prompt('URL or search query:', 'https://google.com')));
+    }).catch(e => alert('Error registering service worker:' + e));
+</script>
