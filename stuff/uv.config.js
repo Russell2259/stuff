@@ -1,6 +1,6 @@
 self.__uv$config = {
-    prefix: '/stuff/uv/service/',
-    bare: 'https://polarislearning.art/bare/',
+    prefix: location.pathname.includes('/uv/service/') ? location.pathname.split('/uv/service/')[0] + '/uv/service/',
+    bare: 'https://tomp.app/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: './uv.handler.js',
