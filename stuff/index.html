@@ -3,37 +3,37 @@
 <script src="./uv.config.js"></script>
 
 <script>
-const search = (input, template) => {
-    let url;
-  
-    try {
-      url = new URL(input);
+    const search = (input, template) => {
+        let url;
 
-      if (url.hostname.includes('.')) return url.toString();
-    } catch { }
-  
-    try {
-      url = new URL(`http://${input}`);
+        try {
+            url = new URL(input);
 
-      if (url.hostname.includes('.')) return url.toString();
-    } catch { }
-  
-    // Treat the input as a search query
-    return template.replace('%s', encodeURIComponent(input));
-  }
+            if (url.hostname.includes('.')) return url.toString();
+        } catch {}
 
-localforage.config({
-  driver: localforage.INDEXEDDB,
-  name: 'Ultraviolet',
-  version: 1.0,
-  storeName: 'ultraviolet_config'
-});
+        try {
+            url = new URL(`http://${input}`);
 
-	(async () => {
-	if (!await localforage.getItem('bare')) await localforage.setItem('bare', prompt('Bare server:'));
-	
-    navigator.serviceWorker.register('./sw.js').then(e => {
-	window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', prompt('URL or search query:', 'https://google.com')));
-    }).catch(e => alert('Error registering service worker:' + e));
-	})();
+            if (url.hostname.includes('.')) return url.toString();
+        } catch {}
+
+        // Treat the input as a search query
+        return template.replace('%s', encodeURIComponent(input));
+    }
+
+    localforage.config({
+        driver: localforage.INDEXEDDB,
+        name: 'Ultraviolet',
+        version: 1.0,
+        storeName: 'ultraviolet_config'
+    });
+
+    (async () => {
+        if (!await localforage.getItem('bare')) await localforage.setItem('bare', prompt('Bare server:'));
+
+        navigator.serviceWorker.register('./sw.js').then(e => {
+            window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', prompt('URL or search query:', 'https://google.com')));
+        }).catch(e => alert('Error registering service worker:' + e));
+    })();
 </script>
