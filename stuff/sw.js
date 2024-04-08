@@ -1,20 +1,8 @@
-importScripts('localforage.js');
-
-localforage.config({
-  driver: localforage.INDEXEDDB,
-  name: 'Ultraviolet',
-  version: 1.0,
-  storeName: 'ultraviolet_config'
-});
-
-try {
-  const bareServer = await localforage.getItem('bare');
-  if (bareServer) self.__uv$config.bare === bareServer;
-} catch {}
-
 importScripts('uv.bundle.js');
 importScripts('uv.config.js');
 importScripts(__uv$config.sw || 'uv.sw.js');
+
+if (new URL(location).searchParams.get('bare')) self.__uv$config.bare === new URL(location).searchParams.get('bare');
 
 const sw = new UVServiceWorker();
 
