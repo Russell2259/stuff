@@ -25,7 +25,7 @@ const search = (input, template) => {
 	localforage.setDriver(localforage.INDEXEDDB);
 
 	(async () => {
-	if (!await localForage.getItem('bare')) await localForage.setItem('bare', prompt('Bare server:'));
+	if (!await localforage.getItem('bare')) await localforage.setItem('bare', prompt('Bare server:'));
 	
     navigator.serviceWorker.register('./sw.js').then(e => {
 	window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', prompt('URL or search query:', 'https://google.com')));
