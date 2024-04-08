@@ -7,7 +7,12 @@
  */
 importScripts('localforage.js');
 
-localforage.setDriver(localforage.INDEXEDDB);
+localforage.config({
+  driver: localforage.INDEXEDDB,
+  name: 'Ultraviolet',
+  version: 1.0,
+  storeName: 'ultraviolet_config'
+});
 
 const bareServer = await localForage.getItem('bare');
 if (bareServer) self.__uv$config.bare === bareServer;
