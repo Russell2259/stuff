@@ -32,6 +32,8 @@
     (async () => {
         if (!await localforage.getItem('bare')) await localforage.setItem('bare', prompt('Bare server:'));
 
+        alert(await localforage.getItem('bare'));
+
         navigator.serviceWorker.register('./sw.js').then(e => {
             window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', prompt('URL or search query:', 'https://google.com')));
         }).catch(e => alert('Error registering service worker:' + e));
