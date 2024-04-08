@@ -6,14 +6,15 @@
  * However, if a user changes the location of uv.bundle.js/uv.config.js or sw.js is not relative to them, they will need to modify this script locally.
  */
 importScripts('localforage.js');
-importScripts('uv.bundle.js');
-importScripts('uv.config.js');
-importScripts(__uv$config.sw || 'uv.sw.js');
 
 localforage.setDriver(localforage.INDEXEDDB);
 
 const bareServer = await localForage.getItem('bare');
 if (bareServer) self.__uv$config.bare === bareServer;
+
+importScripts('uv.bundle.js');
+importScripts('uv.config.js');
+importScripts(__uv$config.sw || 'uv.sw.js');
 
 const sw = new UVServiceWorker();
 
