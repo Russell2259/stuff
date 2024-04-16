@@ -31,6 +31,10 @@
 
     (async () => {
         if (!await localforage.getItem('bare')) await localforage.setItem('bare', prompt('Bare server:'));
+        else if (confirm('Reset bare?')) {
+            await localforage.removeItem('bare);
+            location.reload();
+        }
 
         navigator.serviceWorker.register('./sw.js?bare=' + await localforage.getItem('bare')).then(e => {
             const url = prompt('URL or search query:', 'google.com');
