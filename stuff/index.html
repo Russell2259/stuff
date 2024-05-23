@@ -38,8 +38,8 @@
 
         navigator.serviceWorker.register('./sw.js'/*'?bare=' + await localforage.getItem('bare')*/).then(e => {
             const url = prompt('URL or search query:', 'google.com');
-            
-            window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', url));
+
+            window.open('data:text/html,').document.write(`<iframe src="${window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', url))}" style="position: fixed;top: 0;bottom: 0;left: 0;right: 0;height: 100vh;width:100vw;outline: none;border: 0px;"></iframe>`);
         }).catch(e => alert('Error registering service worker:' + e));
     //})();
 </script>
