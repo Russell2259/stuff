@@ -1,4 +1,4 @@
-<script src="./localforage.js"></script>
+<!--<script src="./localforage.js"></script>-->
 <script src="./uv.bundle.js"></script>
 <script src="./uv.config.js"></script>
 
@@ -22,7 +22,7 @@
         return template.replace('%s', encodeURIComponent(input));
     }
 
-    localforage.config({
+    /*localforage.config({
         driver: localforage.INDEXEDDB,
         name: 'Ultraviolet',
         version: 1.0,
@@ -34,12 +34,12 @@
         else if (confirm('Reset bare?')) {
             await localforage.removeItem('bare');
             location.reload();
-        }
+        }*/
 
-        navigator.serviceWorker.register('./sw.js?bare=' + await localforage.getItem('bare')).then(e => {
+        navigator.serviceWorker.register('./sw.js'/*'?bare=' + await localforage.getItem('bare')*/).then(e => {
             const url = prompt('URL or search query:', 'google.com');
             
             window.location.href = window.__uv$config.prefix + window.__uv$config.encodeUrl(search('https://google.com/search?q=%s', url));
         }).catch(e => alert('Error registering service worker:' + e));
-    })();
+    //})();
 </script>
